@@ -1,12 +1,23 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .models import Cliente
-from .forms import ClienteForm
-from Inversiones_peniche.models import Vehiculo
+from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView, DeleteView
+
 from Inversiones_peniche.forms import VehiculoForm
+from Inversiones_peniche.models import Vehiculo
+from .forms import ClienteForm
+from .models import Cliente
+
+
+class RegistroUsuario(CreateView):
+    model = User
+    template_name = "app/registrar.html"
+    form_class = UserCreationForm
+    success_url = reverse_lazy('inversiones_peniche:index')
 
 
 # Create your views here.

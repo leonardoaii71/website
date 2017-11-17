@@ -9,7 +9,7 @@ from django.shortcuts import reverse
 class Persona(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100, blank=True)
-    fecha_nacimiento = models.DateTimeField()
+    fecha_nacimiento = models.DateTimeField(blank=True, null=True)
     cedula = models.CharField(max_length=20, blank=True)
     correo = models.CharField(max_length=35, blank=True)
     direccion = models.CharField(max_length=50, blank=True)
@@ -22,12 +22,12 @@ class Tipo(models.Model):
 
 
 class Vehiculo(models.Model):
-    matricula = models.CharField(unique=True, max_length=40)
-    modelo = models.CharField(max_length=30)
-    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE)
-    color = models.CharField(max_length=10)
-    condicion = models.CharField(max_length=10)
-    valor_mercado = models.IntegerField()
+    matricula = models.CharField(unique=True, max_length=40, blank=True)
+    modelo = models.CharField(max_length=30, blank=True, null=True)
+    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE, blank=True, null=True)
+    color = models.CharField(max_length=10, blank=True, null=True)
+    condicion = models.CharField(max_length=10, blank=True, null=True)
+    valor_mercado = models.IntegerField( blank=True, null=True)
 
 
 class Rol(models.Model):
