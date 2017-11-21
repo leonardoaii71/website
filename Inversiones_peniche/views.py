@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView, DeleteView
-
+from Inversiones_peniche.forms import RegistroForm
 from Inversiones_peniche.forms import VehiculoForm
 from Inversiones_peniche.models import Vehiculo
 from .forms import ClienteForm
@@ -16,7 +16,7 @@ from .models import Cliente
 class RegistroUsuario(CreateView):
     model = User
     template_name = "app/registrar.html"
-    form_class = UserCreationForm
+    form_class = RegistroForm
     success_url = reverse_lazy('inversiones_peniche:index')
 
 

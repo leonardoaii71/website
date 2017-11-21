@@ -41,12 +41,12 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess1" placeholder="Cliente Asociado" required="required">
+                  <input type="text" class="form-control has-feedback-left" id="clienteAsoc" placeholder="Cliente Asociado" required="required">
                   <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess2" placeholder="Vehículo Asociado">
+                  <input type="text" class="form-control" id="vehiculoAsoc" placeholder="Vehículo Asociado">
                   <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
@@ -56,42 +56,46 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess4" placeholder="Fecha Actual">
+                  <input type="text" class="form-control" id="fechaActual" placeholder="Fecha Actual">
                   <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
 
                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="Fecha de primer pago">
+                  <input type="text" class="form-control has-feedback-left" id="fechaPrimerPago" placeholder="Fecha correspondiente al primer pago">
                   <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess6" placeholder="Cantidad Prestada">
+                  <input type="number" class="form-control" id="cantidad_prestada" placeholder="Cantidad Prestada">
                   <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess7" placeholder="Tasa de Interés">
+                  <input type="number" class="form-control has-feedback-left" id="tasa_de_interes" placeholder="Tasa de Interés">
                   <span class="fa fa-info form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess8" placeholder="Monto capital" disabled>
+                {% comment %}<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="number" class="form-control" id="montoCapital" placeholder="Monto capital" disabled>
                   <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
                   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess9" placeholder="Monto Interés" disabled>
+                  <input type="text" class="form-control has-feedback-left" id="montoInteres" placeholder="Monto Interés" disabled>
                   <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess10" placeholder="Monto Total" disabled>
+                  <input type="text" class="form-control" id="monto_total" placeholder="Monto Total" disabled>
                   <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
-                <div class="form-group">
+
+
+
+{% endcomment %}
+               {% comment %} <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de préstamo</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <select class="form-control">
@@ -102,11 +106,16 @@
                       <option>Capital + Interés</option>
                     </select>
                   </div>
+                </div>{% endcomment %}
+
+                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="number" class="form-control" id="prueba" placeholder="Prueba">
+                  <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
                   <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Frecuencia de pago</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-7 col-xs-10">
                     <select class="form-control">
                       <option>Seleccione una opción</option>
                       <option>Semanal</option>
@@ -116,9 +125,31 @@
                   </div>
                 </div>
 
+                 <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Monto Capital</label>
+                     <div class="col-md-6 col-sm-6 col-xs-10">
+                    <input id="montoCapital" class="form-control col-md-7 col-xs-12" type="number" name="montoCapital" disabled>
+                  </div>
+                </div>
+                 <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Monto Interés</label>
+                     <div class="col-md-6 col-sm-6 col-xs-10">
+                    <input id="monto_interes" class="form-control col-md-7 col-xs-12" type="number" disabled>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Monto Total</label>
+                     <div class="col-md-6 col-sm-6 col-xs-10">
+                    <input id="monto_total" class="form-control col-md-7 col-xs-12" type="number"  disabled>
+                  </div>
+                </div>
+
+
                      <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-primary" id="calcular">Calcular</button>
+                         <button type="button" class="btn btn-primary">Guardar Cambios</button>
+
                   </div>
                 </form>
                 </div>
@@ -141,6 +172,23 @@
   {{ block.super }}
   <!-- validator -->
   <script src="/static/vendors/validator/validator.js"></script>
+    <script>
+    $('#calcular').click(function () {
+        var cantidad_prestada = $('#cantidad_prestada').val();
+        var tasa_interes = $('#tasa_de_interes').val();
+        var monto_total = cantidad_prestada * tasa_interes;
+
+        $('#monto_total').val(monto_total);
+    });
+
+   {% comment %} $('#tasa_interes').click(function () {
+        var cantidad_prestada = $('#cantidad_prestada').val();
+        var tasa_interes = $('#tasa_de_interes').val();
+        var monto_total = cantidad_prestada * tasa_interes;
+
+        $('#monto_total').val(monto_total);
+    });{% endcomment %}
+    </script>
 {% endblock javascripts %}
 
 

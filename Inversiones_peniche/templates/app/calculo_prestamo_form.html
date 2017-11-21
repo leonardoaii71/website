@@ -1,0 +1,153 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Cálculo de préstamos{% endblock title %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <!--<div class="">-->
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Cálculo de préstamos</h3>
+        </div>
+        <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+
+                <form class="form-horizontal form-label-right" novalidate>
+
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Cálculo de Préstamos</h4>
+                  </div>
+                  <div class="modal-body">
+                      <form class="form-horizontal form-label-left input_mask">
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="number" class="form-control has-feedback-left" id="cantidadPrestada" placeholder="Cantidad Prestada">
+                  <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="number" class="form-control" id="numeroPeriodos" placeholder="Número de Períodos">
+                  <span class="fa fa- form-control-feedback right" aria-hidden="true"></span>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input type="number" class="form-control has-feedback-left" id="interesAnual" placeholder="Interés Anual (%)">
+                  <span class="fa fa-info form-control-feedback left" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-md-6 col-sm-5 col-xs-5">
+                    <select class="form-control">
+                      <option>Frecuencia de Pago</option>
+                      <option>Semanal</option>
+                      <option>Quincenal</option>
+                      <option>Mensual</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <select class="form-control">
+                      <option>Método de Amortización</option>
+                      <option>Convencional</option>
+                      <!--<option>Quincenal</option>
+                      <option>Mensual</option>-->
+                    </select>
+                  </div>
+                </div>
+
+
+                 <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="totalintereses">Total de Intereses
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="totalintereses" class="form-control col-md-7 col-xs-12" name="totalintereses" disabled>
+                  </div>
+                </div>
+
+
+
+                  <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="totalcuotas">Total de Cuotas:
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="totalcuotas" class="form-control col-md-7 col-xs-12" name="totalcuotas" disabled>
+                  </div>
+                </div>
+
+               <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="capitalcuota">Cuota Capital:
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="capitalcuota" class="form-control col-md-7 col-xs-12" name="capitalcuota" disabled>
+                  </div>
+                </div>
+
+               <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuotainteres">Cuota Interes:
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="cuotainteres" class="form-control col-md-7 col-xs-12" name="cuotainteres" disabled>
+                  </div>
+                </div>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="total">Total a pagar:
+                  </label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="total" class="form-control col-md-7 col-xs-12" name="total" disabled>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <!--<label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>-->
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <!--<select class="form-control">
+                      <option>Seleccione una opción</option>
+                      <option>Carro</option>
+                      <option>Camion</option>
+                      <option>Jeepeta</option>
+                    </select>-->
+                  </div>
+                </div>
+
+                           <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Calcular</button>
+                  </div>
+                </form>
+
+                </div>
+                </div>
+              </div>
+            </div>
+
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <!-- validator -->
+  <script src="/static/vendors/validator/validator.js"></script>
+{% endblock javascripts %}
