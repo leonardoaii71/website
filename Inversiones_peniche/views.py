@@ -11,8 +11,10 @@ from Inversiones_peniche.forms import VehiculoForm
 from Inversiones_peniche.models import Vehiculo
 from .forms import ClienteForm
 from .models import Cliente
+# from .models import Prestamo
 
 
+# Create your views here.
 class RegistroUsuario(CreateView):
     model = User
     template_name = "app/registrar.html"
@@ -20,7 +22,13 @@ class RegistroUsuario(CreateView):
     success_url = reverse_lazy('inversiones_peniche:index')
 
 
-# Create your views here.
+# class PrestamoCreate(CreateView):
+#     model = Prestamo
+#     template_name = "app/pruebaPrestamos.html"
+#     form_class = PrestamoForm
+#     success_url = reverse_lazy('inversiones_peniche:index')
+
+
 def index(request):
     context = {}
     template = loader.get_template('app/index.html')

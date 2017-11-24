@@ -5,6 +5,7 @@ from django.forms import ModelForm, TextInput, EmailInput, DateInput
 import datetime
 from django.utils import timezone
 from .models import Cliente
+from .models import Prestamo
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -25,7 +26,21 @@ class RegistroForm(UserCreationForm):
                 'last_name' : 'Apellidos',
                 'email': 'Correo',
         }
-
+#
+# class PrestamoForm(ModelForm):
+#
+#     class Meta:
+#         model = Prestamo
+#         fields = [
+#                 'no_prestamo',
+#                 'user',
+#                 'cliente',
+#                 'vehiculo',
+#                 'fecha',
+#                 'monto',
+#                 'tasa_de_interes',
+#                 'resultado',
+#         ]
 
 
 

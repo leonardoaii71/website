@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'nuevo/$', views.ClienteCreate.as_view(), name='cliente-add'),
     url(r'editar/(?P<pk>[0-9]+)/$', ClienteUpdate.as_view(), name='cliente-update'),
     url(r'^login$', login, {'template_name': 'loginUsuario.html'}, name='login'),
-    url(r'^registrar', RegistroUsuario.as_view(), name="registrar")
+    url(r'^registrar', RegistroUsuario.as_view(), name="registrar"),
+    # url(r'nuevo/$',views.PrestamoCreate.as_view(), name="prestamo-add")
 
 ]
 

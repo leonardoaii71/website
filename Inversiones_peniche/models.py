@@ -68,7 +68,7 @@ class Prestamo(models.Model):
     total_cuotas_pagadas = models.IntegerField
     fecha_ultimo_pago = models.DateTimeField
     monto_ultimo_pago = models.DateTimeField
-    intereses_vencidoes = models.FloatField
+    intereses_vencidos = models.FloatField
 
 
 class Factura (models.Model):

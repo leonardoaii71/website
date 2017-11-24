@@ -1,165 +1,74 @@
-{% extends "app/base_site.html" %}
+<title> JavaScript Loan Calculator </title>
+<table>
 
-{% block title %} Ingreso de Préstamo {% endblock title %}
+    <td></td>
+     <legend>Datos Principales</legend>
+                <label for="principal"><b>No. de Prestamo</b></label>
+				<input type="text" id="noPrestamo" />
+				<br />
+				<label for="interest"><b>Usuario</b></label>
+				<input type="text" id="usuario" />
+				<br />
+                <label for="principal"><b>Cliente Asociado</b></label>
+				<input type="text" id="cliente" />
+				<br />
+				<label for="interest"><b>Vehiculo Asociado</b></label>
+				<input type="text" id="vehiculo" />
+				<br />
+                <label for="principal"><b>Fecha Actual</b></label>
+				<input type="text" id="fecha" />
+				<br />
+                </fieldset>
+<label for="terms"><b>Tipo de préstamo:</b></label>
+				<select id="terms">
+					<option >Interes+Capital</option>
+					<option >Amortizado</option>
 
-{% block content %}
-  <div class="right_col" role="main">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Ingreso de Préstamo</h3>
-        </div>
-        <div class="clearfix"></div>
+				</select>
+	<tr><td>Monto del préstamo ($):</td>
+	<td><input id="amount" onchange="calculate();"></td>
+	<td rowspan=8>
+	  <canvas id="graph" width="400" height="250"></canvas></td></tr>
+	<tr><td>Tasa de Interes anual (%):</td>
+	  <td><input id="apr" onchange="calculate();"></td></tr>
+	<tr><td>Plazo de pago (años):</td>
+	  <td><input id="years" onchange="calculate();"></td>
+	{% comment %}<tr><td>Zipcode (to find lenders):</td>
+	  <td><input id="zipcode" onchange="calculate();"></td>{% endcomment %}
+	<tr><th>Pagos Aproximados:</th>
+	  <td><button onclick="calculate();">Calcular</button></td></tr>
+    <td><button type="submit" >Guardar</button></td></tr>
+    <td><button >Cerrar</button></td></tr>
+	<tr><td>Pago mensual:</td>
+	  <td>$<span class="output" id="payment"></span></td></tr>
+	<tr><td>Total capital a pagar:</td>
+	  <td>$<span class="output" id="total"></span></td></tr>
+	<tr><td>Total de intereses:</td>
+	  <td>$<span class="output" id="totalinterest"></span></td></tr>
+	{% comment %}<tr><th>Sponsors:</th><td colspan=2>
+	  Apply for your loan with one of these fine lenders:
+	    <div id="lenders"></div></td></tr>{% endcomment %}
+	</table>
 
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-
-                <form class="form-horizontal form-label-right" novalidate>
-
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
-
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Ingreso de Préstamo</h4>
-                  </div>
-                  <div class="modal-body">
-                      <form class="form-horizontal form-label-left input_mask">
-
-                         <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">No. de Préstamo
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="noPrestamo" class="form-control col-md-7 col-xs-12" disabled>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="clienteAsoc"  placeholder="Cliente Asociado" required="required">
-                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="vehiculoAsoc" placeholder="Vehículo Asociado">
-                  <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="usuario"  placeholder="Usuario">
-                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="fechaActual"  placeholder="Fecha Actual">
-                  <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-                          <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Monto Prestado ($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="monto_prestada" class="form-control col-md-7 col-xs-12" onchange="calcular();" type="number">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Tasa de Interes Anual (%):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="tasa_de_interes" class="form-control col-md-7 col-xs-12" onchange="calcular();" type="number">
-                  </div>
-                </div>
-
-                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Plazo</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="plazo" class="form-control col-md-7 col-xs-12" onchange="calcular();" type="number">
-                  </div>
-                </div>
-
-
-
-                 {% comment %} <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Frecuencia de pago</label>
-                  <div class="col-md-6 col-sm-7 col-xs-10">
-                    <select class="form-control">
-                      <option>Seleccione una opción</option>
-                      <option>Semanal</option>
-                      <option>Quincenal</option>
-                      <option>Mensual</option>
-                    </select>
-                  </div>
-                </div>{% endcomment %}
-
-
-                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-4 col-xs-12">Pago Mensual ($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="pago_mensual" class="form-control col-md-7 col-xs-12" type="text"  disabled>
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-4 col-xs-12">Total a pagar ($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="total_a_pagar" class="form-control col-md-7 col-xs-12" type="number"  disabled>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-4 col-xs-12">Total de intereses ($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="total_intereses" class="form-control col-md-7 col-xs-12" type="text"  disabled>
-                  </div>
-                </div>
-
-
-                     <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="calcular" onclick="calcular();">Calcular</button>
-                         <button type="button" class="btn btn-primary">Guardar Cambios</button>
-
-                  </div>
-                </form>
-                </div>
-                </div>
-              </div>
-                </div>
-                </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-    </div>
-  </div>
-{% endblock content %}
 {% block javascripts %}
-  {{ block.super }}
-  <!-- validator -->
-  <script src="/static/vendors/validator/validator.js"></script>
-    <script>
-
-function calcular() {
+<script language="javascript">
+    function calculate() {
   //Look up the input and output elements in the document
-  var amount = document.getElementById("monto_prestado");
-  var apr = document.getElementById("tasa_de_interes");
-  var years = document.getElementById("plazo");
+  var amount = document.getElementById("amount");
+  var apr = document.getElementById("apr");
+  var years = document.getElementById("years");
   var zipcode = document.getElementById("zipcode");
-  var payment = document.getElementById("pago_mensual");
-  var total = document.getElementById("total_a_pagar");
-  var totalinterest = document.getElementById("total_intereses");
+  var payment = document.getElementById("payment");
+  var total = document.getElementById("total");
+  var totalinterest = document.getElementById("totalinterest");
 
 // Get the user's input from the input elements.
 // Convert interest from a percentage to a decimal, and convert from
 // an annual rate to a monthly rate. Convert payment period in years
 // to the number of monthly payments.
-var principal = parseFloat(monto_prestado.value);
-var interest = parseFloat(tasa_de_interes.value) / 100 / 12;
-var payments = parseFloat(plazo.value) * 12;
+var principal = parseFloat(amount.value);
+var interest = parseFloat(apr.value) / 100 / 12;
+var payments = parseFloat(years.value) * 12;
 
 // compute the monthly payment figure
 var x = Math.pow(1 + interest, payments); //Math.pow computes powers
@@ -210,9 +119,9 @@ function save(amount, apr, years, zipcode) {
 window.onload = function() {
  // If the browser supports localStorage and we have some stored data
  if (window.localStorage && localStorage.loan_amount) {
- document.getElementById("cantidad_prestada").value = localStorage.loan_amount;
- document.getElementById("tasa_de_interes").value = localStorage.loan_apr;
- document.getElementById("plazo").value = localStorage.loan_years;
+ document.getElementById("amount").value = localStorage.loan_amount;
+ document.getElementById("apr").value = localStorage.loan_apr;
+ document.getElementById("years").value = localStorage.loan_years;
  document.getElementById("zipcode").value = localStorage.loan_zipcode;
  }
 };
@@ -333,89 +242,5 @@ function chart(principal, interest, monthly, payments) {
  rightEdge-5, y);
  }
 }
-   </script>
+  </script>
 {% endblock javascripts %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %}
-{% block javascripts %}
-  {{ block.super }}
-  <!-- validator -->
-  <script src="/static/vendors/validator/validator.js"></script>
-    <script>
-    $('#calcular').click(function () {
-        var cantidad_prestada = $('#cantidad_prestada').val();
-        var tasa_interes = $('#tasa_de_interes').val();
-        var plazo = $('#plazo').val();
-
-
-    var valor_cuota= (cantidad_prestada*tasa_interes)+plazo;
-
-
-        $('#valor_cuota').val(valor_cuota);
-    });
-
-    $('#tasa_interes').click(function () {
-        var cantidad_prestada = $('#cantidad_prestada').val();
-        var tasa_interes = $('#tasa_de_interes').val();
-        var monto_total = cantidad_prestada * tasa_interes;
-
-        $('#monto_total').val(monto_total);
-    });
-    </script>
-{% endblock javascripts %}
-
-
-{% endcomment %}
-
