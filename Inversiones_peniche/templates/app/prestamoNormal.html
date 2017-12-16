@@ -19,12 +19,9 @@
 				<input type="text" id="fecha" />
 				<br />
                 </fieldset>
-<label for="terms"><b>Tipo de préstamo:</b></label>
-				<select id="terms">
-					<option >Interes+Capital</option>
-					<option >Amortizado</option>
 
-				</select>
+
+
 	<tr><td>Monto del préstamo ($):</td>
 	<td><input id="amount" onchange="calculate();"></td>
 	<td rowspan=8>
@@ -33,25 +30,28 @@
 	  <td><input id="apr" onchange="calculate();"></td></tr>
 	<tr><td>Plazo de pago (años):</td>
 	  <td><input id="years" onchange="calculate();"></td>
-	{% comment %}<tr><td>Zipcode (to find lenders):</td>
-	  <td><input id="zipcode" onchange="calculate();"></td>{% endcomment %}
+
 	<tr><th>Pagos Aproximados:</th>
 	  <td><button onclick="calculate();">Calcular</button></td></tr>
     <td><button type="submit" >Guardar</button></td></tr>
     <td><button >Cerrar</button></td></tr>
+
+
 	<tr><td>Pago mensual:</td>
 	  <td>$<span class="output" id="payment"></span></td></tr>
 	<tr><td>Total capital a pagar:</td>
 	  <td>$<span class="output" id="total"></span></td></tr>
 	<tr><td>Total de intereses:</td>
 	  <td>$<span class="output" id="totalinterest"></span></td></tr>
-	{% comment %}<tr><th>Sponsors:</th><td colspan=2>
-	  Apply for your loan with one of these fine lenders:
-	    <div id="lenders"></div></td></tr>{% endcomment %}
+
 	</table>
+
+
+
 
 {% block javascripts %}
 <script language="javascript">
+
     function calculate() {
   //Look up the input and output elements in the document
   var amount = document.getElementById("amount");
