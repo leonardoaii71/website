@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 from django.forms import ModelForm, TextInput, EmailInput, DateInput
 import datetime
 from django.utils import timezone
+from .models import Cliente, Vehiculo, Tipo
 from .models import Cliente
 from .models import Prestamo
 from django.contrib.auth.models import User
@@ -72,11 +73,13 @@ class ClienteForm(ModelForm):
                                                                         'onfocus':"(this.type='date')",
                                                                         'placeholder': 'Fecha de Nacimiento'}),
 
-            'direccion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Direccion'}),
-            'numero_cel': TextInput(attrs={'type': 'tel', 'class': 'form-control has-feedback-left', 'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",
+            'direccion':    TextInput(attrs={'class': 'form-control', 'placeholder': 'Direccion'}),
+            'numero_cel':   TextInput(attrs={'type': 'tel', 'class': 'form-control has-feedback-left',
+                                           'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",
                                            'placeholder': 'Celular'}),
             'numero_telefono': TextInput(attrs={'class': 'form-control',
-                                                'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",'placeholder': 'Telefono'}),
+                                                'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",
+                                                'placeholder': 'Telefono'}),
             'vehiculo': TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'})
         }
 
@@ -91,11 +94,25 @@ class ClienteForm(ModelForm):
 
         }
 
+        def clean_fecha_nacimiento(self):
+            fecha = self.cleaned_data['fecha_nacimiento']
+            if fecha > timezone.now():
+                raise validators.ValidationError(message='Fecha incorrecta: no puede ser una fecha futura')
+            return fecha
 
 
-    def clean_fecha_nacimiento(self):
-        fecha = self.cleaned_data['fecha_nacimiento']
-        if fecha > timezone.now():
-            raise validators.ValidationError(message='Fecha incorrecta: no puede ser una fecha futura')
-        return fecha
+class VehiculoForm(ModelForm):
+
+    class Meta:
+        model = Vehiculo
+        fields = '__all__'
+
+        widgets = {
+            'matricula': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Matrícula'}),
+            'modelo': TextInput(attrs={'class': "form-control ", 'placeholder': 'Modelo '}),
+            'year': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Año'}),
+            'color': TextInput(attrs={'class': "form-control ", 'placeholder': 'Color'}),
+            'condicion': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Condición'}),
+            'valor_mercado': TextInput(attrs={'class': "form-control ", 'placeholder': 'Valor de mercado'}),
+        }
 

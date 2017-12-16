@@ -16,7 +16,7 @@
           <div class="x_panel">
             <div class="x_title">
 
-                <form class="form-horizontal form-label-right" novalidate>
+
 
            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
 
@@ -30,62 +30,71 @@
                     <h4 class="modal-title" id="myModalLabel">Ingreso de Vehículo</h4>
                   </div>
                   <div class="modal-body">
-                      <form class="form-horizontal form-label-left input_mask">
+                      <form class="form-horizontal form-label-left input_mask" id="vehiculoForm" method="post" action="">
+                          {% csrf_token %}
+                           {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess1" placeholder="Matrícula">
+
+                    {{ form.matricula }}
                   <span class="fa fa-folder form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess2" placeholder="Modelo">
+
+                    {{ form.modelo }}
                   <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess3" placeholder="Año">
+                <div class="col-md-6 col-sm-6 col-xs-12 form-gro.up has-feedback">
+
+                    {{ form.year }}
                   <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess4" placeholder="Color">
+
+                    {{ form.color }}
                   <span class="fa fa-pencil form-control-feedback right" aria-hidden="true"></span>
                 </div>
 
 
                  <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="Condición">
+
+                     {{ form.condicion }}
                   <span class="fa fa-info form-control-feedback left" aria-hidden="true"></span>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="inputSuccess6" placeholder="Valoración Actual">
+
+                    {{ form.valor_mercado }}
                   <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                 </div>
+
 
 
                   <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                    <select class="form-control">
-                      <option>Seleccione una opción</option>
-                      <option>Carro</option>
-                      <option>Camion</option>
-                      <option>Jeepeta</option>
-                    </select>
+                    {{ form.tipo }}
                   </div>
                 </div>
 
                      <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="submit" form="vehiculoForm" class="btn btn-primary">Guardar Cambios</button>
                   </div>
                 </form>
                 </div>
                 </div>
               </div>
                 </div>
-                </form>
+
             </div>
           </div>
         </div>
