@@ -1,0 +1,34 @@
+
+{%block navbar%}
+{% endblock %}
+{% block content %}
+
+    <form method="post">
+     {% csrf_token %}
+        {{form.non_field_errors}}
+         <h1>Iniciar Sesion</h1>
+            <div>
+              <input type="text" class="form-control" placeholder="Usuario" required="" />
+            </div>
+            <div>
+              <input type="password" class="form-control" placeholder="Contrasena" required="" />
+            </div>
+            <div>
+              <a class="btn btn-default submit" href="Inversiones_peniche/templates/app/index.html">Iniciar Sesion</a>
+              <a class="reset_pass" href="#">Olvido su contrasena?</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">Nuevo Usuario?
+                <a href="registrar"> Crear cuenta </a>
+              </p>
+
+              <div class="clearfix"></div>
+              <br />
+            </div>
+
+    </form>
+{% endblock %}
+
