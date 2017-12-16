@@ -17,7 +17,9 @@ class MultiFormMixin(ContextMixin):
         return self.form_classes
 
     def get_forms(self, form_classes, form_names=None, bind_all=False):
-        return dict([(key, self._create_form(key, klass, (form_names and key in form_names) or bind_all)) \
+        return dict([(key,
+                      self._create_form(
+                          key, klass, (form_names and key in form_names) or bind_all))
                      for key, klass in form_classes.items()])
 
     def get_form_kwargs(self, form_name, bind_form=False):
@@ -112,7 +114,8 @@ class ProcessMultipleFormsView(ProcessFormView):
     def _process_all_forms(self, form_classes):
         forms = self.get_forms(form_classes, None, True)
         if all([form.is_valid() for form in forms.values()]):
-            return self.forms_valid(forms)
+            for key in forms.keys():
+                return self.forms_valid(forms, key)
         else:
             return self.forms_invalid(forms)
 

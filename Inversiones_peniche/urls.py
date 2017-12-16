@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^.*\.html', views.gentella_html, name='gentella'),
     url(r'nuevo/cliente$', views.Clienteform.as_view(), name='cliente-add'),
-    #url(r'nuevo/vehiculo$', views.VehiculoCreate.as_view(), name='vehiculo-add'),
+    url(r'nuevo/vehiculo$', views.registro_vehiculo.as_view(), name='vehiculo-add'),
     url(r'editar/(?P<pk>[0-9]+)/$', views.ClienteUpdate.as_view(), name='cliente-update')
 ]
 

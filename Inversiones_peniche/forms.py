@@ -25,11 +25,13 @@ class ClienteForm(ModelForm):
                                                                         'onfocus':"(this.type='date')",
                                                                         'placeholder': 'Fecha de Nacimiento'}),
 
-            'direccion': TextInput(attrs={'class': 'form-control', 'placeholder': 'Direccion'}),
-            'numero_cel': TextInput(attrs={'type': 'tel', 'class': 'form-control has-feedback-left', 'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",
+            'direccion':    TextInput(attrs={'class': 'form-control', 'placeholder': 'Direccion'}),
+            'numero_cel':   TextInput(attrs={'type': 'tel', 'class': 'form-control has-feedback-left',
+                                           'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",
                                            'placeholder': 'Celular'}),
             'numero_telefono': TextInput(attrs={'class': 'form-control',
-                                                'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",'placeholder': 'Telefono'}),
+                                                'data-inputmask':"'mask': '(999) 999-9999', 'removeMaskOnSubmit': true ",
+                                                'placeholder': 'Telefono'}),
             'vehiculo': TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'})
         }
 
@@ -65,5 +67,4 @@ class VehiculoForm(ModelForm):
             'condicion': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Condición'}),
             'valor_mercado': TextInput(attrs={'class': "form-control ", 'placeholder': 'Valor de mercado'}),
         }
-
 

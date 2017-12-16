@@ -1,0 +1,52 @@
+{% for error in forms.vehiculo.non_field_errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+{% endfor %}
+
+
+<div class="col-md-6 col-sm-6 col-xs-12 form.vehiculo-group has-feedback">
+
+    {{ forms.vehiculo.matricula }}
+    <span class="fa fa-folder form-control-feedback left" aria-hidden="true"></span>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+
+    {{ forms.vehiculo.modelo }}
+    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 form.vehiculo-gro.up has-feedback">
+
+    {{ forms.vehiculo.year }}
+    <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+
+    {{ forms.vehiculo.color }}
+    <span class="fa fa-pencil form-control-feedback right" aria-hidden="true"></span>
+</div>
+
+
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+
+    {{ forms.vehiculo.condicion }}
+    <span class="fa fa-info form-control-feedback left" aria-hidden="true"></span>
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+
+    {{ forms.vehiculo.valor_mercado }}
+    <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+</div>
+
+
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ forms.vehiculo.tipo }}
+    </div>
+</div>
+

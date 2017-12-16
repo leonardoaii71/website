@@ -1,8 +1,10 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 from django.shortcuts import render
 from django.template import loader
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+
+from Inversiones_peniche.mixins import AjaxFormMixin
 from .models import Cliente
 from .forms import ClienteForm
 from Inversiones_peniche.models import Vehiculo
@@ -31,31 +33,23 @@ def gentella_html(request):
 class Clienteform(MultiFormsView):
 
     form_classes = {'cliente': ClienteForm, 'vehiculo': VehiculoForm}
-    template_name = 'app/cliente_form.html'
+    template_name = 'app/cliente_form2.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
 
-"""
+
 class ClienteCreate(CreateView):
     model = Cliente
     form_class = ClienteForm
     template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
-    # def get(self, request, *args, **kwargs):
-    #     clienteform = QuestionForm(self.request.GET or None)
-    #     vehiculo_form = AnswerForm(self.request.GET or None)
-    #     context = self.get_context_data(**kwargs)
-    #     context['answer_form'] = answer_form
-    #     context['question_form'] = question_form
-    #     return self.render_to_response(context)
-"""
-class ClienteUpdate(UpdateView, MultiFormsView):
+
+class ClienteUpdate(UpdateView):
     model = Cliente
     form_class = ClienteForm
     template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
-    context_object_name = 'forms.cliente'
 
 
 """
@@ -71,26 +65,12 @@ class VehiculoCreate(CreateView):
     success_url = reverse_lazy('inversiones_peniche:index')
 """
 
-def registro_vehiculo(request):
-    if request.method == 'POST':
+class registro_vehiculo(CreateView, AjaxFormMixin):
+    model = Vehiculo
+    form_class = VehiculoForm
+    template_name = 'app/cliente_form2.html'
+    success_url = reverse_lazy('inversiones_peniche:index')
 
-        form = VehiculoForm(request.POST)
-        if form.is_valid():
-            matricula = request.POST.get('matricula', '')
-            modelo = request.POST.get('modelo', '')
-            color = request.POST.get('color', '')
-            condicion = request.POST.get('condicion', '')
-            valor_mercado = request.POST.get('valor_mercado', '')
-            vehiculo_obj = Vehiculo(matricula=matricula, modelo=modelo, color=color, condicion=condicion,
-                                    valor_mercado=valor_mercado)
-            vehiculo_obj.save()
-
-            # return HttpResponseRedirect(reverse('inversiones_peniche:'))
-    else:
-        form = VehiculoForm()
-
-
-    return render(request, 'inversiones_peniche/form_vehiculo.html', {
-        'form': form,
-    })
-
+    def form_valid(self, form):
+        super().form_valid(form)
+        return ""

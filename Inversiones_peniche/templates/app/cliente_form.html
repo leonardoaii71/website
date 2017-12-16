@@ -3,220 +3,196 @@
 {% block title %} Registro de Clientes {% endblock title %}
 
 {% block content %}
-  <div class="right_col" role="main">
-    <!--<div class="">-->
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Ingreso de Cliente</h3>
-        </div>
-        <div class="clearfix"></div>
+    <div class="right_col" role="main">
+        <!--<div class="">-->
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Ingreso de Cliente</h3>
+            </div>
+            <div class="clearfix"></div>
 
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
 
 
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#clientemodal">Large modal</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#clientemodal">Large modal
+                            </button>
 
-            <div class="modal fade bs-example-modal-lg" id="clientemodal" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+                            <div class="modal fade bs-example-modal-lg" id="clientemodal" tabindex="-1" role="dialog"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
 
-                  <div class="modal-header">
+                                        <div class="modal-header">
 
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
+                                            <button type="button" class="close" data-dismiss="modal"><span
+                                                    aria-hidden="true">×</span>
+                                            </button>
 
-                    <h4 class="modal-title" id="clientModalLabel">Ingreso de Cliente</h4>
+                                            <h4 class="modal-title" id="clientModalLabel">Ingreso de Cliente</h4>
 
-                  </div>
-                    <div class="modal-body">
+                                        </div>
+                                        <div class="modal-body">
 
-                        <form class="form-horizontal form-label-left" method="post"  id="clienteForm">
-                            {% csrf_token %}
-                        {% for error in forms.cliente.non_field_errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
+                                            <form class="form-horizontal form-label-left" method="post" id="clienteForm"
+                                                  action="http://localhost:1024/inv/nuevo/cliente">
+                                                {% csrf_token %}
+                                                {% for error in form.non_field_errors %}
+                                                    <div class="alert alert-danger">
+                                                        <strong>{{ error|escape }}</strong>
+                                                    </div>
+                                                {% endfor %}
+                                                <div class="clearfix ">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.nombre }}
+                                                        <span class="fa fa-user form-control-feedback left"
+                                                              aria-hidden="true"></span>
+                                                        <span id="helpBlock"
+                                                              class="help-block with-errors">
+                                                            {{ form.nombre.help_text }} {{ form.nombre.errors }}</span>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.apellido }}<span
+                                                            class="fa fa-user form-control-feedback right"
+                                                            aria-hidden="true"></span>
+                                                        <div class="help-block with-errors">{{ form.apellido.errors }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix ">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.correo }}<span
+                                                            class="fa fa-envelope form-control-feedback left"
+                                                            aria-hidden="true"></span>
+                                                        <div class="help-block with-errors">{{ form.correo.errors }}</div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.numero_telefono }}<span
+                                                            class="fa fa-phone form-control-feedback right"
+                                                            aria-hidden="true"></span>
+                                                        <div class="help-block with-errors">{{ form.numero_telefono.errors }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix ">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.numero_cel }}<span
+                                                            class="fa fa-mobile form-control-feedback left"
+                                                            aria-hidden="true"></span>
+                                                        <div class="help-block with-errors">{{ form.numero_cel.errors }}</div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.fecha_nacimiento }}<span
+                                                            class="fa fa-calendar form-control-feedback right"
+                                                            aria-hidden="true"></span>
+                                                        <div class="help-block with-errors">{{ form.fecha_nacimiento.errors }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix ">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.cedula }}<span
+                                                            class="fa fa-user form-control-feedback left"
+                                                            aria-hidden="true"></span>
+                                                        <div class="help-block with-errors">{{ form.cedula.errors }}</div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        {{ form.direccion }}<span
+                                                            class="fa fa-home form-control-feedback right"
+                                                            aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="col-xs-12 col-sm-12 col-md-12 left">
+                                                    <label class="control-label">Vehiculo</label>
+                                                </span>
+                                                <div class="input-group col-xs-12 col-sm-12 col-md-12">
+                                                    {{ form.vehiculo }}
+
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                                data-toggle="dropdown" aria-expanded="false">
+                                                            <span class="glyphicon glyphicon-option-horizontal"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                            {% if form.vehiculo.data %}
+                                                                <li>
+                                                                    <a href="#" d>Ver</a>
+                                                                </li>
+                                                            {% endif %}
+                                                            {% if not form.vehiculo.data %}
+                                                                <li>
+                                                                    <button type="button" class="" data-toggle="modal"
+                                                                            data-target="#vehiculoform">
+                                                                        <a href="{% url 'inversiones_peniche:vehiculo-add' %}">Agregar</a>
+                                                                    </button>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                    <!-- /btn-group -->
+                                                </div>
+
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Cerrar
+                                                    </button>
+                                                    <input type="submit" class="btn btn-primary" form="clienteForm"
+                                                           value="Guardar">
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        {% endfor %}
-                        <div class="clearfix ">
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                {{ forms.cliente.nombre }}
-                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                <span id="helpBlock" class="help-block with-errors">{{ form.nombre.help_text }} {{ form.nombre.errors }}</span>
-                            </div>
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                {{ forms.cliente.apellido }}<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                <div class="help-block with-errors">{{ form.apellido.errors }}</div>
-                            </div>
+
                         </div>
-                        <div class="clearfix ">
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                            {{ forms.cliente.correo }}<span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
-                                <div class="help-block with-errors">{{ form.correo.errors }}</div>
-                            </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                             {{ forms.cliente.numero_telefono }}<span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
-                                <div class="help-block with-errors">{{ forms.cliente.numero_telefono.errors }}</div>
-                            </div>
+
+            <div class="modal fade bs-example-modal-lg" id='vehiculoform' tabindex="-1" role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Ingreso de Vehículo</h4>
                         </div>
-                        <div class="clearfix ">
-                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                             {{ forms.cliente.numero_cel }}<span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
-                             <div class="help-block with-errors">{{ forms.cliente.numero_cel.errors }}</div>
-                             </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal form-label-left input_mask" id="vehiculoForm" method="post"
+                                  action="">
+                                {% include "app/vehiculo_form.html" %}
 
-                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                              {{ forms.cliente.fecha_nacimiento }}<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
-                                 <div class="help-block with-errors">{{ forms.cliente.fecha_nacimiento.errors }}</div>
-                             </div>
-                        </div>
-                            <div class="clearfix ">
-                            <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                {{ forms.cliente.cedula }}<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                <div class="help-block with-errors">{{ forms.cliente.cedula.errors }}</div>
-                            </div>
-
-                              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                  {{ forms.cliente.direccion }}<span class="fa fa-home form-control-feedback right" aria-hidden="true"></span>
-                            </div>
-                            </div>
-                            <span class="col-xs-12 col-sm-12 col-md-12 left">
-                                <label class="control-label">Vehiculo</label>
-                            </span>
-                            <div class="input-group col-xs-12 col-sm-12 col-md-12">
-                            {{ forms.cliente.vehiculo}}
-
-                            <div class="input-group-btn">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                  <span class="glyphicon glyphicon-option-horizontal"></span>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                {% if forms.cliente.vehiculo.data  %}
-                                  <li>
-                                      <a href="#" d>Ver</a>
-                                  </li>
-                                {% endif %}
-                                {% if not forms.cliente.vehiculo.data  %}
-                                  <li>
-                                     <button type="button" class="" data-toggle="modal" data-target="#vehiculoform">Agregar</button>
-                                </li>
-                              {% endif %}
-                              </ul>
-                            </div>
-                            <!-- /btn-group -->
-                          </div>
-
-
-                                       <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <input type="submit" class="btn btn-primary" form="clienteForm" value="Guardar" >
-                              </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" form="vehiculoForm" class="btn btn-primary">Guardar Cambios
+                                    </button>
+                                </div>
                             </form>
-
+                        </div>
+                    </div>
                 </div>
-                </div>
-              </div>
             </div>
 
 
-
-
-            </div>
-          </div>
         </div>
-      </div>
-
-
-
-            <div class="modal fade bs-example-modal-lg" id='vehiculoform' tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Ingreso de Vehículo</h4>
-                  </div>
-                  <div class="modal-body">
-                      <form class="form-horizontal form-label-left input_mask" id="vehiculoForm" method="post" action="">
-                          {% csrf_token %}
-                           {% for error in forms.vehiculo.non_field_errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
-                    {{ forms.vehiculo.matricula }}
-                  <span class="fa fa-folder form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
-                    {{ forms.vehiculo.modelo }}
-                  <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-gro.up has-feedback">
-
-                    {{ forms.vehiculo.year }}
-                  <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
-                    {{ forms.vehiculo.color }}
-                  <span class="fa fa-pencil form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-
-                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
-                     {{ forms.vehiculo.condicion }}
-                  <span class="fa fa-info form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-
-                    {{ forms.vehiculo.valor_mercado }}
-                  <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                </div>
-
-
-
-                  <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    {{ forms.vehiculo.tipo }}
-                  </div>
-                </div>
-
-                     <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" form="vehiculoForm" class="btn btn-primary">Guardar Cambios</button>
-                  </div>
-                </form>
-                </div>
-                </div>
-              </div>
-                </div>
-
-
-
     </div>
-  </div>
 {% endblock content %}
 
 {% block javascripts %}
-  {{ block.super }}
-  <!-- validator -->
-   <script src="/static/vendors/validator/validator.js"></script>
+    {{ block.super }}
+    <!-- validator -->
+    <script src="/static/vendors/validator/validator.js"></script>
     <!--input mask-->
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 
