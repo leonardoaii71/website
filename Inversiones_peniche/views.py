@@ -33,7 +33,7 @@ def gentella_html(request):
 class Clienteform(MultiFormsView):
 
     form_classes = {'cliente': ClienteForm, 'vehiculo': VehiculoForm}
-    template_name = 'app/cliente_form2.html'
+    template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
 
@@ -68,7 +68,7 @@ class VehiculoCreate(CreateView):
 class registro_vehiculo(CreateView, AjaxFormMixin):
     model = Vehiculo
     form_class = VehiculoForm
-    template_name = 'app/cliente_form2.html'
+    template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
     def form_valid(self, form):
