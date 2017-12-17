@@ -27,23 +27,6 @@ class RegistroForm(UserCreationForm):
                 'last_name' : 'Apellidos',
                 'email': 'Correo',
         }
-#
-# class PrestamoForm(ModelForm):
-#
-#     class Meta:
-#         model = Prestamo
-#         fields = [
-#                 'no_prestamo',
-#                 'user',
-#                 'cliente',
-#                 'vehiculo',
-#                 'fecha',
-#                 'monto',
-#                 'tasa_de_interes',
-#                 'resultado',
-#         ]
-
-
 
 
 class VehiculoForm(forms.Form):
