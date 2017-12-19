@@ -34,7 +34,7 @@
           <!-- Cliente menu -->
         <li><a><i class="fa fa-users"></i> Clientes <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a data-toggle="modal" href="{% url 'inversiones_peniche:cliente-add' %}#clientemodal" >Ingresar Cliente</a></li>
+            <li><a href="{% url 'inversiones_peniche:cliente-add' %}">Ingresar Cliente</a></li>
             <li><a href="cliente_form.html">Modificar Cliente</a></li>
             <li><a href="pruebaPrestamos.html">Préstamos asociados</a></li>
            <!-- <li><a href="form_wizards.html">Form Wizard</a></li>
@@ -42,13 +42,13 @@
             <li><a href="form_buttons.html">Form Buttons</a></li>-->
           </ul>
         </li>
-          
+
              <!-- Vehiculos menu -->
          <li><a><i class="fa fa-car"></i> Vehículos <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="form_vehiculo.html">Ingresar Vehículo</a></li>
             <li><a href="tables_dynamic.html">Modificar Vehículo</a></li>
-             <li><a href="tables_dynamic.html">Vehículos asociados a clientes</a></li>
+{#             <li><a href="tables_dynamic.html">Vehículos asociados a clientes</a></li>#}
           </ul>
         </li>
              <!-- Prestamos menu -->
@@ -59,7 +59,7 @@
             <li><a href="prestamoNormal.html">Cálculo de Préstamo</a></li>
             {% comment %}<li><a href="icons.html">Acuerdo de Pago</a></li>
             <li><a href="glyphicons.html">Liquidación de Préstamo</a></li>{% endcomment %}
-          <li><a href="widgets.html">Cálculo de amortización</a></li>
+{#          <li><a href="widgets.html">Cálculo de amortización</a></li>#}
            <!-- <li><a href="invoice.html">Invoice</a></li>
             <li><a href="inbox.html">Inbox</a></li>
             <li><a href="calendar.html">Calendar</a></li>-->
@@ -71,14 +71,14 @@
             <li><a href="chartjs.html">Recibos al Cobro</a></li>
             <li><a href="chartjs2.html">Recibos despues del Cobro</a></li>
             <li><a href="morisjs.html">Estados de Cuentas</a></li>
-            <li><a href="echarts.html">Historial de cuentas</a></li>
-            <li><a href="other_charts.html">Relación de Ingresos</a></li>
+{#            <li><a href="echarts.html">Historial de cuentas</a></li>#}
+{#            <li><a href="other_charts.html">Relación de Ingresos</a></li>#}
           </ul>
         </li>
         <li><a><i class="fa fa-clone"></i>Utilidades <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="fixed_sidebar.html">Calendario de Eventos</a></li>
-            <li><a href="fixed_footer.html">Calculadora</a></li>
+            <li><a href="fixed_sidebar.html">Manual de usuario</a></li>
+{#            <li><a href="fixed_footer.html">Calculadora</a></li>#}
           </ul>
         </li>
       </ul>

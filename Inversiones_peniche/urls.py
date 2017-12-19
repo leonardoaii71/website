@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 
 #from .views import ClienteUpdate
 from . import views
-from .views import RegistroUsuario, ClienteUpdate
+from .views import RegistroUsuario, ClienteUpdate, busqueda
 from django.contrib import admin
 from django.contrib.auth.views import login
 from django.conf.urls import url
