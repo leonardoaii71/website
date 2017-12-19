@@ -31,9 +31,10 @@
             <li><a href="index3.html">Configuración</a></li>{% endcomment %}
           </ul>
         </li>
+          <!-- Cliente menu -->
         <li><a><i class="fa fa-users"></i> Clientes <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{% url 'inversiones_peniche:cliente-add' %}">Ingresar Cliente</a></li>
+            <li><a data-toggle="modal" href="{% url 'inversiones_peniche:cliente-add' %}#clientemodal" >Ingresar Cliente</a></li>
             <li><a href="cliente_form.html">Modificar Cliente</a></li>
             <li><a href="pruebaPrestamos.html">Préstamos asociados</a></li>
            <!-- <li><a href="form_wizards.html">Form Wizard</a></li>
@@ -41,7 +42,8 @@
             <li><a href="form_buttons.html">Form Buttons</a></li>-->
           </ul>
         </li>
-
+          
+             <!-- Vehiculos menu -->
          <li><a><i class="fa fa-car"></i> Vehículos <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="form_vehiculo.html">Ingresar Vehículo</a></li>
@@ -49,7 +51,7 @@
              <li><a href="tables_dynamic.html">Vehículos asociados a clientes</a></li>
           </ul>
         </li>
-
+             <!-- Prestamos menu -->
         <li><a><i class="fa fa-money"></i> Préstamos <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="pruebaPrestamos.html">Crear Préstamo</a></li>

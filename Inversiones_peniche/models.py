@@ -22,14 +22,20 @@ class Tipo(models.Model):
 
 
 class Vehiculo(models.Model):
+    tipo_vehiculo = (
+        ('1',"Carro"),
+        ('2','Camion'),
+        ('3','Jeepeta/Suv'),
+        ('4','Van')
+    )
+
     matricula = models.CharField(unique=True, max_length=40, blank=True, null=True)
     modelo = models.CharField(max_length=30, blank=True, null=True)
-    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE, default=1, blank=True, null=True)
+    tipo = models.CharField(default=1, max_length=2, blank=True, null=True,  choices=tipo_vehiculo)
     color = models.CharField(max_length=10, blank=True, null=True)
     condicion = models.CharField(max_length=10, blank=True, null=True)
     valor_mercado = models.IntegerField(blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
-
 
 class Rol(models.Model):
     nombre = models.CharField

@@ -1,28 +1,20 @@
-from django.http import HttpResponse, response
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
+from django.http import JsonResponse
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 from django.template import loader
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
-from Inversiones_peniche.mixins import AjaxFormMixin
-from .models import Cliente
-from .forms import ClienteForm
-from Inversiones_peniche.models import Vehiculo
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView, DeleteView
+from django.contrib.auth.models import User
 from Inversiones_peniche.forms import RegistroForm
 from Inversiones_peniche.forms import VehiculoForm
-from .multiforms import MultiFormsView
 from Inversiones_peniche.models import Vehiculo
 from .forms import ClienteForm
 from .models import Cliente
+from .multiforms import MultiFormsView
+
+
 # from .models import Prestamo
-
-
 # Create your views here.
 class RegistroUsuario(CreateView):
     model = User
@@ -61,8 +53,6 @@ class Clienteform(MultiFormsView):
     template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
-
-
 class ClienteCreate(CreateView):
     model = Cliente
     form_class = ClienteForm
@@ -89,12 +79,28 @@ class VehiculoCreate(CreateView):
     success_url = reverse_lazy('inversiones_peniche:index')
 
 
-class registro_vehiculo(CreateView, AjaxFormMixin):
+class registro_vehiculo(CreateView):
     model = Vehiculo
     form_class = VehiculoForm
     template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
+
     def form_valid(self, form):
-        super().form_valid(form)
-        return ""
+        response = super().form_valid(form)
+
+        if self.request.is_ajax():
+            print(form.cleaned_data)
+            data = {
+                'val': form.cleaned_data['matricula'],
+                'desc': form.cleaned_data['matricula'] +"  "+ form.cleaned_data['modelo'] +"  "+  str(form.cleaned_data['year'])
+            }
+            return JsonResponse(data)
+        else:
+            return response
