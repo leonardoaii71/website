@@ -20,21 +20,19 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#clientemodal">Large modal
                             </button>
-
                             <div class="modal fade bs-example-modal-lg" id="clientemodal" tabindex="-1" role="dialog"
                                  aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
 
-                                        <div class="modal-header">
 
-                                            <button type="button" class="close" data-dismiss="modal"><span
-                                                    aria-hidden="true">×</span>
-                                            </button>
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span
+                                                        aria-hidden="true">×</span>
+                                                </button>
 
-                                            <h4 class="modal-title" id="clientModalLabel">Ingreso de Cliente</h4>
-
-                                        </div>
+                                                <h4 class="modal-title" id="clientModalLabel">Ingreso de Cliente</h4>
+                                            </div>
                                         <div class="modal-body">
 
                                             <form class="form-horizontal form-label-left" method="post" id="clienteForm"
@@ -56,7 +54,7 @@
 
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                         {{ forms.cliente.apellido }}<span
-                                                            class="fa fa-user form.cliente-control-feedback right"
+                                                            class="fa fa-user form-control-feedback right"
                                                             aria-hidden="true"></span>
                                                         <div class="help-block with-errors">{{ forms.cliente.apellido.errors }}</div>
                                                     </div>
@@ -132,23 +130,19 @@
                                                     </div>
                                                     <!-- /btn-group -->
                                                 </div>
+                                                 </form>
 
-
-                                                <div class="modal-footer">
+                                            <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">
                                                         Cerrar
                                                     </button>
                                                     <input type="submit" class="btn btn-primary" form="clienteForm"
                                                            value="Guardar">
-                                                </div>
-                                            </form>
-
+                                            </div>
                                         </div>
+                                      </div>
                                     </div>
-                                </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -167,7 +161,7 @@
                         </div>
                         <div class="modal-body">
                             <form class="form-horizontal form-label-left input_mask" id="vehiculoForm" method="post"
-                                  action="{% url "inversiones_peniche:vehiculo-add" %}">
+                                   action="."  data-url='{% url 'inversiones_peniche:vehiculo-add' %}'>
                                  {% csrf_token %}
                                         {% for error in forms.vehiculo.non_field_errors %}
                                             <div class="alert alert-danger">
@@ -180,53 +174,54 @@
 
                                             {{ forms.vehiculo.matricula }}
                                             <span class="fa fa-folder form-control-feedback left" aria-hidden="true"></span>
+                                            {{ forms.vehiculo.matricula.errors }}
                                         </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
                                             {{ forms.vehiculo.modelo }}
                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                                            {{ forms.vehiculo.modelo.errors }}
                                         </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12 form.vehiculo-gro.up has-feedback">
 
                                             {{ forms.vehiculo.year }}
                                             <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
+                                            {{ forms.vehiculo.year.errors }}
                                         </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
                                             {{ forms.vehiculo.color }}
                                             <span class="fa fa-pencil form-control-feedback right" aria-hidden="true"></span>
+                                            {{ forms.vehiculo.color.errors }}
                                         </div>
-
 
                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
                                             {{ forms.vehiculo.condicion }}
                                             <span class="fa fa-info form-control-feedback left" aria-hidden="true"></span>
+                                            {{ forms.vehiculo.condicion.errors }}
                                         </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 
                                             {{ forms.vehiculo.valor_mercado }}
                                             <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                                            {{ forms.vehiculo.valor_mercado.errors }}
                                         </div>
-
 
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>
                                              <div class="col-md-9 col-sm-9 col-xs-12">
                                                 {{ forms.vehiculo.tipo }}
+                                                 {{ forms.vehiculo.tipo.errors }}
                                             </div>
-
                                         </div>
-
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" form="vehiculoForm" class="btn btn-primary">Guardar Cambios
-                                    </button>
+                                    <button type="submit" form="vehiculoForm" class="btn btn-primary">Guardar Cambios</button>
                                 </div>
                             </form>
                         </div>
@@ -245,35 +240,17 @@
     <script src="/static/vendors/validator/validator.js"></script>
     <!--input mask-->
     <script src="/static/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-
+    <script src="/static/js/querys.js"></script>
     <script>
-$(document).ready(function(){
-    var $myForm = $('##vehiculoform')
-    $myForm.submit(function(event){
-        event.preventDefault()
-        var $formData = $(this).serialize()
-        var $thisURL = $myForm.attr('data-url') || window.location.href // or set your own url
-        $.ajax({
-            method: "POST",
-            url: $thisURL,
-            data: $formData,
-            success: handleFormSuccess,
-            error: handleFormError,
-        })
-    })
+        $(document).ready(function() {
 
-    function handleFormSuccess(data, textStatus, jqXHR){
-        console.log(data)
-        console.log(textStatus)
-        console.log(jqXHR)
-        $myForm.reset(); // reset form data
-    }
+            // get the current URL
+            var url = $(location).attr('href');
 
-    function handleFormError(jqXHR, textStatus, errorThrown){
-        console.log(jqXHR)
-        console.log(textStatus)
-        console.log(errorThrown)
-    }
-})
+            // if the URL ends with the anchor #portfolioModal93 then we want to open the modal
+            if(url === "{% url 'inversiones_peniche:cliente-add' %}#clientemodal") {
+                $('#clientemodal').modal('show');
+            }
+        });
     </script>
 {% endblock javascripts %}

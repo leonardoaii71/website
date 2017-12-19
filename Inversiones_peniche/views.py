@@ -1,23 +1,20 @@
-from django.http import HttpResponse, response
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
+from django.http import JsonResponse
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 from django.template import loader
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
-from Inversiones_peniche.mixins import AjaxFormMixin
-from .models import Cliente
-from .forms import ClienteForm
-from Inversiones_peniche.models import Vehiculo
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView, DeleteView
+from django.contrib.auth.models import User
 from Inversiones_peniche.forms import RegistroForm
 from Inversiones_peniche.forms import VehiculoForm
-from .multiforms import MultiFormsView
 from Inversiones_peniche.models import Vehiculo
+from .forms import ClienteForm
+from .models import Cliente
+from .multiforms import MultiFormsView
+
+
+# from .models import Prestamo
 from .forms import ClienteForm, PrestamoForm
 from .models import Cliente, Prestamo
 from django.http import HttpResponse
@@ -38,24 +35,22 @@ def busqueda(request):
 
 class RegistroUsuario(CreateView):
     model = User
-    template_name = "app/login_user.html"
+    template_name = "app/registrar.html"
     form_class = RegistroForm
     success_url = reverse_lazy('inversiones_peniche:index')
 
 
-class PrestamoCreate(CreateView):
-     model = Prestamo
-     template_name = "app/pruebaPrestamos.html"
-     form_class = PrestamoForm
-     success_url = reverse_lazy('inversiones_peniche:index')
+# class PrestamoCreate(CreateView):
+#     model = Prestamo
+#     template_name = "app/pruebaPrestamos.html"
+#     form_class = PrestamoForm
+#     success_url = reverse_lazy('inversiones_peniche:index')
 
 
 def index(request):
-    #template = loader.get_template('')
-    prestamo = Prestamo.objects.all()
-    contexto = {'prestamos':prestamo}
-    return render(request, 'app/index.html', contexto)
-
+    context = {}
+    template = loader.get_template('app/index.html')
+    return HttpResponse(template.render(context, request))
 
 
 def gentella_html(request):
@@ -109,7 +104,22 @@ class registro_vehiculo(CreateView, AjaxFormMixin):
     template_name = 'app/cliente_form.html'
     success_url = reverse_lazy('inversiones_peniche:index')
 
-    def form_valid(self, form):
-        super().form_valid(form)
-        return ""
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        if self.request.is_ajax():
+            print(form.cleaned_data)
+            data = {
+                'val': form.cleaned_data['matricula'],
+                'desc': form.cleaned_data['matricula'] +"  "+ form.cleaned_data['modelo'] +"  "+  str(form.cleaned_data['year'])
+            }
+            return JsonResponse(data)
+        else:
+            return response
