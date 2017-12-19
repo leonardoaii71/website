@@ -40,7 +40,7 @@
                                             <form class="form-horizontal form-label-left" method="post" id="clienteForm"
                                                   action="">
                                                 {% csrf_token %}
-                                                {% for error in form.cliente.non_field_errors %}
+                                                {% for error in forms.cliente.non_field_errors %}
                                                     <div class="alert alert-danger">
                                                         <strong>{{ error|escape }}</strong>
                                                     </div>
@@ -50,8 +50,7 @@
                                                         {{ forms.cliente.nombre }}
                                                         <span class="fa fa-user form-control-feedback left"
                                                               aria-hidden="true"></span>
-                                                        <span id="helpBlock"
-                                                              class="help-block with-errors">
+                                                        <span id="helpBlock" class="help-block with-errors">
                                                             {{ forms.cliente.nombre.help_text }} {{ forms.nombre.errors }}</span>
                                                     </div>
 
@@ -82,14 +81,14 @@
                                                         {{ forms.cliente.numero_cel }}<span
                                                             class="fa fa-mobile form-control-feedback left"
                                                             aria-hidden="true"></span>
-                                                        <div class="help-block with-errors">{{ form.cliente.numero_cel.errors }}</div>
+                                                        <div class="help-block with-errors">{{ forms.cliente.numero_cel.errors }}</div>
                                                     </div>
 
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                         {{ forms.cliente.fecha_nacimiento }}<span
                                                             class="fa fa-calendar form-control-feedback right"
                                                             aria-hidden="true"></span>
-                                                        <div class="help-block with-errors">{{ form.cliente.fecha_nacimiento.errors }}</div>
+                                                        <div class="help-block with-errors">{{ forms.cliente.fecha_nacimiento.errors }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix ">
@@ -97,7 +96,7 @@
                                                         {{ forms.cliente.cedula }}<span
                                                             class="fa fa-user form-control-feedback left"
                                                             aria-hidden="true"></span>
-                                                        <div class="help-block with-errors">{{ form.cliente.cedula.errors }}</div>
+                                                        <div class="help-block with-errors">{{ forms.cliente.cedula.errors }}</div>
                                                     </div>
 
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">

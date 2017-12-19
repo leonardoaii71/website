@@ -1,7 +1,7 @@
 {% extends "app/base_site.html" %}
 
 {% block title %} Ingreso de Prestamo {% endblock title %}
-
+{% csrf_token %}
 {% block content %}
   <div class="right_col" role="main">
       <div class="page-title">
@@ -27,123 +27,141 @@
                     <h4 class="modal-title" id="myModalLabel">Ingreso de Prestamo</h4>
                   </div>
                   <div class="modal-body">
-                      <form class="form-horizontal form-label-left input_mask" id="prestamosForm">
+                      <form class="form-horizontal form-label-left input_mask" id="prestamosForm" method="post" action="">
+                        {% csrf_token %}
 
-                         <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">No. de Prestamo
+                           {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+
+
+                     {% comment %}    <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" hidden>No. de Prestamo
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="noPrestamo" class="form-control col-md-7 col-xs-12" disabled>
+                    <input id="noPrestamo" class="form-control col-md-7 col-xs-12" disabled hidden>
                   </div>
-                </div>
+                </div>{% endcomment %}
+
+                   <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form.cliente }}
+                  <span class="fa fa-folder form-control-feedback left" aria-hidden="true"></span>
+                       <div class="help-block with-errors">{{ form.cliente.errors }}</div>
+                   </div>
+
+{#                  <input type="text" class="form-control has-feedback-left" id="clienteAsoc"  placeholder="Cliente Asociado" required="required">#}
+
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="clienteAsoc"  placeholder="Cliente Asociado" required="required">
-                  <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                </div>
-
-                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="vehiculoAsoc" placeholder="Vehiculo Asociado">
+                    {{ form.vehiculo}}
+{#                  <input type="text" class="form-control" id="vehiculoAsoc" placeholder="Vehiculo Asociado">#}
                   <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                    <div class="help-block with-errors">{{ form.vehiculo.errors }}</div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control has-feedback-left" id="usuario"  placeholder="Usuario">
+                    {{ form.operador }}
+{#                  <input type="text" class="form-control has-feedback-left" id="usuario"  placeholder="Usuario">#}
                   <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                    <div class="help-block with-errors">{{ form.operador.errors }}</div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input type="text" class="form-control" id="fechaActual"  placeholder="Fecha Actual">
+                    {{ form.fecha_actual }}
+{#                  <input type="text" class="form-control" id="fechaActual"  placeholder="Fecha Actual">#}
                   <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
+                    <div class="help-block with-errors">{{ form.fecha_actual.errors }}</div>
                 </div>
 
 
-                  <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Monto Prestado ($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="principal" class="form-control col-md-7 col-xs-12" type="text">
-                  </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form.monto_prestado }}
+{#                  <input type="text" class="form-control" id="fechaActual"  placeholder="Fecha Actual">#}
+                  <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                        <div class="help-block with-errors">{{ form.monto_prestado.errors }}</div>
                 </div>
 
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Tasa de Interes Anual (%):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="interest" class="form-control col-md-7 col-xs-12" type="text">
-                  </div>
+
+                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                    {{ form.tasa_interes }}
+                  <span class="fa fa-info form-control-feedback right" aria-hidden="true"></span>
+                         <div class="help-block with-errors">{{ form.tasa_interes.errors }}</div>
                 </div>
+
+
 
 
                  <div class="form-group col-md-6 col-sm-6 col-xs-12">
                <label>Tipo de préstamo:</label>
                 <p>
                   Interés-Capital:
-                  <input type="radio" class="flat" name="tipoPrestamo" id="normal" value="Normal" checked="" required  onclick="toggleElement()"/>
+                  <input type="radio" class="flat" name="tipoPrestamo" id="normal" value="Normal" checked="" required  onclick="toggleElement()" />
                     Amortizado:
                   <input type="radio" class="flat" name="tipoPrestamo" id="prestamoAmortizado" value="Amortizado" onclick="toggleElement()" />
                 </p>
                  </div>
 
                           <div class="form-group col-md-12">
-                          <label for="terms" class="control-label col-md-1 col-sm-2 col-xs-4">Plazo:</label>
-                          <div class="col-md-6 col-sm-6 col-xs-10">
-                                <select id="terms" class="form-control" required>
-                                  <option value="">Seleccione..</option>
-                                  <option value="12">12 Meses</option>
-                                  <option value="24">24 Meses</option>
-                                  <option value="36">36 Meses</option>
-                                  <option value="48">48 Meses</option>
-                                  <option value="60">60 Meses</option>
-                                    <option value="72">72 Meses</option>
-                                </select>
+                          <label for="terms" class="control-label col-md-2 col-sm-2 col-xs-6">Plazo:</label>
+                          <div class="col-md-3 col-sm-6 col-xs-6">
+                              {{ form.plazo }}
+                              {{ form.plazo.errors }}
                               </div>
                           </div>
 
 
                   <div class="form-group ocultable" >
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Pago mensual($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="payment" class="form-control col-md-7 col-xs-12" type="text">
+                 <label class="control-label col-md-2 col-sm-2 col-xs-6">Pago mensual($):</label>
+                     <div class="col-md-3 col-sm-6 col-xs-6">
+                          {{ form.pago_mensual }}
+{#                    <input id="payment" class="form-control col-md-7 col-xs-4" type="text">#}
                   </div>
+                       <div class="help-block with-errors">{{ form.pago_mensual.errors }}</div>
                 </div>
 
                  <div class="form-group ocultable">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Total capital($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="total" class="form-control col-md-7 col-xs-12" type="text">
+                  <label class="control-label col-md-2 col-sm-2 col-xs-6">Total capital($):</label>
+                     <div class="col-md-3 col-sm-6 col-xs-6">
+                         {{ form.monto_total }}
+{#                    <input id="total" class="form-control col-md-7 col-xs-12" type="text">#}
                   </div>
+                      <div class="help-block with-errors">{{ form.monto_total.errors }}</div>
                 </div>
 
                           <div class="form-group ocultable">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Total interes($):</label>
-                     <div class="col-md-6 col-sm-6 col-xs-10">
-                    <input id="totalinterest" class="form-control col-md-7 col-xs-12" type="text">
+                  <label class="control-label col-md-2 col-sm-2 col-xs-6">Total interes($):</label>
+                     <div class="col-md-3 col-sm-6 col-xs-6">
+                         {{ form.total_intereses }}
+{#                    <input id="totalinterest" class="form-control col-md-7 col-xs-12" type="text">#}
                   </div>
+                               <div class="help-block with-errors">{{ form.total_intereses.errors }}</div>
                 </div>
 
-
-                      </form>
 
                      <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" value="calcular" onclick="tipoPrestamos();">Calcular</button>
-                         <button type="button" class="btn btn-primary">Guardar Cambios</button>
-
-                  </div>
-
+                         <button  class="btn btn-primary" type="submit" form="prestamosForm">Guardar Cambios</button>
+                      </div>
 
 
-                      <form>
+
+                      </form>
+
+
+
 			            <fieldset>
 			            <legend>Totales</legend>
 				        <div id="Result"></div>
 			            </fieldset>
-		        </form>
+
 
                 </div>
                 </div>
               </div>
                 </div>
-                </form>
             </div>
           </div>
         </div>
@@ -538,7 +556,20 @@ function chart(principal, interest, monthly, payments) {
 
     }
 
-
+$('#clienteAsoc').keyup(function(e){
+ consulta = $("#clienteAsoc").val();
+ $.ajax({
+ data: {'nombre': consulta},
+ url: '/cliente/busqueda/',
+ type: 'get',
+ success : function(data) {
+         console.log(data[0].nombre);
+ },
+ error : function(message) {
+         console.log(message);
+      }
+ });
+});
 
 </script>
 {% endblock javascripts %}

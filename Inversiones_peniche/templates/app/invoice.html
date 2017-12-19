@@ -1,6 +1,6 @@
 {% extends "app/base_site.html" %}
 
-{% block title %} Invoice {% endblock title %}
+{% block title %} Factura {% endblock title %}
 
 {% block stylesheets %}
   {{ block.super }}
@@ -11,7 +11,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Invoice <small>Some examples to get you started</small></h3>
+          <h3>Invoice </h3>
         </div>
 
         <div class="title_right">
@@ -32,7 +32,7 @@
         <div class="col-md-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Invoice Design <small>Sample user invoice design</small></h2>
+              <h2>Factura</h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -58,7 +58,7 @@
                   <div class="col-xs-12 invoice-header">
                     <h1>
                                     <i class="fa fa-globe"></i> Invoice.
-                                    <small class="pull-right">Date: 16/08/2016</small>
+                                    <small class="pull-right">Fecha: {{ factura.fecha}}</small>
                                 </h1>
                   </div>
                   <!-- /.col -->
@@ -66,17 +66,16 @@
                 <!-- info row -->
                 <div class="row invoice-info">
                   <div class="col-sm-4 invoice-col">
-                    From
+                    Datos del cliente
                     <address>
-                                    <strong>Iron Admin, Inc.</strong>
-                                    <br>795 Freedom Ave, Suite 600
-                                    <br>New York, CA 94107
-                                    <br>Phone: 1 (804) 123-9876
-                                    <br>Email: ironadmin.com
+                                    <strong>{{ factura.cliente }}</strong>
+                                    <br>{{ factura.prestamo }}
+                                    <br>{{factura.nombre_usuario}}
+                                    <br>{{ factura.tipo}}
                                 </address>
                   </div>
                   <!-- /.col -->
-                  <div class="col-sm-4 invoice-col">
+                 {% comment %} <div class="col-sm-4 invoice-col">
                     To
                     <address>
                                     <strong>John Doe</strong>
@@ -84,11 +83,11 @@
                                     <br>New York, CA 94107
                                     <br>Phone: 1 (804) 123-9876
                                     <br>Email: jon@ironadmin.com
-                                </address>
-                  </div>
+                                </address>{{factura.monto }}
+                  </div>{% endcomment %}
                   <!-- /.col -->
                   <div class="col-sm-4 invoice-col">
-                    <b>Invoice #007612</b>
+                    <b>Factura #007612</b>
                     <br>
                     <br>
                     <b>Order ID:</b> 4F3S8J
@@ -101,7 +100,7 @@
                 </div>
                 <!-- /.row -->
 
-                <!-- Table row -->
+               {% comment %} <!-- Table row -->
                 <div class="row">
                   <div class="col-xs-12 table">
                     <table class="table table-striped">
@@ -150,11 +149,11 @@
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
-
+{% endcomment %}
                 <div class="row">
                   <!-- accepted payments column -->
                   <div class="col-xs-6">
-                    <p class="lead">Payment Methods:</p>
+                    <p class="lead">Metodos de pago:</p>
                     <img src="/static/images/visa.png" alt="Visa">
                     <img src="/static/images/mastercard.png" alt="Mastercard">
                     <img src="/static/images/american-express.png" alt="American Express">
@@ -165,25 +164,25 @@
                   </div>
                   <!-- /.col -->
                   <div class="col-xs-6">
-                    <p class="lead">Amount Due 2/22/2014</p>
+                    <p class="lead">Totales</p>
                     <div class="table-responsive">
                       <table class="table">
                         <tbody>
                           <tr>
-                            <th style="width:50%">Subtotal:</th>
-                            <td>$250.30</td>
+                            <th style="width:50%">Monto Total ($):</th>
+                            <td>{{ factura. monto_total }}</td>
                           </tr>
                           <tr>
-                            <th>Tax (9.3%)</th>
-                            <td>$10.34</td>
+                            <th>Monto Capital ($):</th>
+                            <td>{{ factura.monto_capital }}</td>
                           </tr>
                           <tr>
-                            <th>Shipping:</th>
-                            <td>$5.80</td>
+                            <th>Monto Intereses ($):</th>
+                            <td>{{ factura.monto_intereses }}</td>
                           </tr>
                           <tr>
-                            <th>Total:</th>
-                            <td>$265.24</td>
+                            <th>Balance deudor</th>
+                            <td>$</td>
                           </tr>
                         </tbody>
                       </table>
@@ -196,9 +195,9 @@
                 <!-- this row will not appear when printing -->
                 <div class="row no-print">
                   <div class="col-xs-12">
-                    <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
-                    <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
-                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                    <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</button>
+                    <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Realizar pago</button>
+                    <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generar PDF</button>
                   </div>
                 </div>
               </section>

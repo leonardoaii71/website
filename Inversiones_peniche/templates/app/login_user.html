@@ -18,7 +18,8 @@
     <div class="login_wrapper">
       <div class="animate form login_form">
         <section class="login_content">
-          <form>
+          <form method="post" action="">
+            {{form.non_field_errors}}
 
             <h1>Iniciar Sesion</h1>
             <div>
@@ -50,22 +51,28 @@
 
       <div id="register" class="animate form registration_form">
         <section class="login_content">
-          <form>
+          <form method="post" action="" id="init">
+            {% csrf_token %}
             <h1>Crear cuenta</h1>
+
+              <div>
+              <input type="text" class="form-control" name="first_name" placeholder="Nombre" required="" />
+            </div>
+
+            <div>
+              <input type="text" class="form-control" name="last_name" placeholder="Apellidos" required="" />
+            </div>
+            <div>
+              <input type="text" class="form-control" name="username" placeholder="Nombre de usuario" required=""/>
+            </div>
+            <div>
+              <input type="email" class="form-control" name="email" placeholder="Email" required="" />
+            </div>
+            <div>
+              <input type="password" class="form-control" name="password1" placeholder="Contraseña" required="" />
+            </div>
              <div>
-              <input type="text" class="form-control" placeholder="Contrasena de administrador" required="" />
-            </div>
-            <div>
-              <input type="text" class="form-control" placeholder="Nombre de usuario" required=""/>
-            </div>
-            <div>
-              <input type="email" class="form-control" placeholder="Email" required="" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Contrasena de usuario" required="" />
-            </div>
-            <div>
-              <a class="btn btn-default submit" href="index.html">Aceptar</a>
+              <input type="password" class="form-control" name="password2" placeholder="Confirmar contraseña" required="" />
             </div>
 
             <div class="clearfix"></div>
@@ -74,6 +81,9 @@
               <p class="change_link">Eres Usuario?
                 <a href="#signin" class="to_register"> Iniciar sesion</a>
               </p>
+
+
+                 <button type="submit" form="init"> Guardar</button>
 
               <div class="clearfix"></div>
               <br />

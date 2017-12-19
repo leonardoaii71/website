@@ -1,10 +1,10 @@
 from django import forms
 from django.core import validators
 from django.core.validators import RegexValidator
-from django.forms import ModelForm, TextInput, EmailInput, DateInput
+from django.forms import ModelForm, TextInput, EmailInput, DateInput, RadioSelect, Select
 import datetime
 from django.utils import timezone
-from .models import Cliente, Vehiculo, Tipo
+from .models import Vehiculo
 from .models import Cliente
 from .models import Prestamo
 from django.contrib.auth.models import User
@@ -40,7 +40,7 @@ class VehiculoForm(forms.Form):
 
 class ClienteForm(ModelForm):
     cedula = forms.CharField(validators=[
-        RegexValidator(regex=r'\d{11}', code='invalid_cedula', message='La cédula debe contener solo 11 dígitos')],
+        RegexValidator(regex=r'\d{11}', code='invalid_cedula', message='La cedula debe contener solo 11 digitos')],
         max_length=20,
         widget=TextInput(attrs={'class': 'form-control has-feedback-left', 'placeholder': 'Cedula de Identidad'}))
 
@@ -91,11 +91,34 @@ class VehiculoForm(ModelForm):
         fields = '__all__'
 
         widgets = {
-            'matricula': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Matrícula'}),
+            'matricula': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Matricula'}),
             'modelo': TextInput(attrs={'class': "form-control ", 'placeholder': 'Modelo '}),
-            'year': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Año'}),
+            'year': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Ano'}),
             'color': TextInput(attrs={'class': "form-control ", 'placeholder': 'Color'}),
-            'condicion': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Condición'}),
+            'condicion': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Condicion'}),
             'valor_mercado': TextInput(attrs={'class': "form-control ", 'placeholder': 'Valor de mercado'}),
+        }
+
+class PrestamoForm(ModelForm):
+
+
+    class Meta:
+        model = Prestamo
+        fields = ['cliente', 'vehiculo', 'operador', 'fecha_actual', 'monto_prestado', 'tasa_interes', 'monto_total', 'pago_mensual', 'tipo_prestamo', 'total_intereses', 'plazo']
+
+        widgets = {
+
+            'cliente': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Cliente Asociado', 'id': "clienteAsoc"}),
+            'vehiculo': TextInput(attrs={'class': "form-control ", 'placeholder': 'Vehiculo Asociado ', 'id': "vehiculoAsoc"}),
+            'operador': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Operador', 'id': "usuario"}),
+            'fecha_actual': TextInput(attrs={'class': "form-control ", 'placeholder': 'Fecha Actual', 'id': "fechaActual"}),
+            'monto_prestado': TextInput(attrs={'class': "form-control has-feedback-left", 'placeholder': 'Monto Prestado', 'id': "principal"}),
+            'tasa_interes': TextInput(attrs={'class': "form-control ", 'placeholder': 'Tasa de Interes', 'id': "interest"}),
+            'monto_total': TextInput(attrs={'class': "form-control ", 'id': "total"}),
+            'pago_mensual': TextInput(attrs={'class': "form-control ", 'id': "payment"}),
+            'total_intereses': TextInput(attrs={'class': "form-control ", 'id': "totalinterest"}),
+            'tipo_prestamo': RadioSelect(attrs={'class': "flat ", 'required' :""}),
+            'plazo': Select(attrs={'class': "form-control", 'required': "", 'id': 'terms'})
+
         }
 

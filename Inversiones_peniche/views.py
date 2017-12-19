@@ -18,30 +18,44 @@ from Inversiones_peniche.forms import RegistroForm
 from Inversiones_peniche.forms import VehiculoForm
 from .multiforms import MultiFormsView
 from Inversiones_peniche.models import Vehiculo
-from .forms import ClienteForm
-from .models import Cliente
-# from .models import Prestamo
+from .forms import ClienteForm, PrestamoForm
+from .models import Cliente, Prestamo
+from django.http import HttpResponse
+import json
+
 
 
 # Create your views here.
+
+def busqueda(request):
+    if request.is_ajax():
+        clientes = Cliente.objects.filter(nombre__startswith=request.GET['nombre']).values('nombre', 'id')
+        return HttpResponse(json.dumps(list(clientes)), content_type='application/json')
+    else:
+        return HttpResponse("Solo Ajax");
+
+
+
 class RegistroUsuario(CreateView):
     model = User
-    template_name = "app/registrar.html"
+    template_name = "app/login_user.html"
     form_class = RegistroForm
     success_url = reverse_lazy('inversiones_peniche:index')
 
 
-# class PrestamoCreate(CreateView):
-#     model = Prestamo
-#     template_name = "app/pruebaPrestamos.html"
-#     form_class = PrestamoForm
-#     success_url = reverse_lazy('inversiones_peniche:index')
+class PrestamoCreate(CreateView):
+     model = Prestamo
+     template_name = "app/pruebaPrestamos.html"
+     form_class = PrestamoForm
+     success_url = reverse_lazy('inversiones_peniche:index')
 
 
 def index(request):
-    context = {}
-    template = loader.get_template('app/index.html')
-    return HttpResponse(template.render(context, request))
+    #template = loader.get_template('')
+    prestamo = Prestamo.objects.all()
+    contexto = {'prestamos':prestamo}
+    return render(request, 'app/index.html', contexto)
+
 
 
 def gentella_html(request):
@@ -98,3 +112,4 @@ class registro_vehiculo(CreateView, AjaxFormMixin):
     def form_valid(self, form):
         super().form_valid(form)
         return ""
+
